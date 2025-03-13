@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/env": "^15.2.2",
     "axios": "^1.8.3",
+    "dotenv-webpack": "^8.1.0",
+    "fs": "^0.0.1-security",
     "next": "15.2.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "swr": "^2.3.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -21,6 +25,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "daisyui": "^5.0.3",
+    "dotenv": "^16.4.7",
     "eslint": "^9",
     "eslint-config-next": "15.2.2",
     "tailwindcss": "^4",

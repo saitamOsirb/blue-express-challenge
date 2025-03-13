@@ -1,5 +1,5 @@
-import { Origin } from "./Origin";
-import { Location } from "./Location";
+import { Origin } from "./Origin.model";
+import { Location } from "./Location.model";
 export interface Personaje {
   id: number,
   name: string,

@@ -1,0 +1,1 @@
+export const EndPointPersonajes = "https://rickandmortyapi.com/api/character";
