@@ -6,6 +6,7 @@ import { NavBar } from "./shared/navbar/component/NavBar";
 import { Footer } from "./shared/footer/component/Footer";
 import { PersonajesState } from "./personajes/context/personajesState";
 import { Paginador } from "./personajes/component/paginador/component/Paginador";
+import { Filter } from "./personajes/component/filter/component/Filter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,14 +34,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NavBar></NavBar>
-      
         <PersonajesState>
-          <br />
-          <Paginador></Paginador>
+          
           <Personajes></Personajes>
+         
+          <br />
           <Footer></Footer>
         </PersonajesState>
-
       </body>
     </html>
   );

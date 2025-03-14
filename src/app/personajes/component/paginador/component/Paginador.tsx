@@ -5,45 +5,19 @@ import React from "react";
 import { useContext, useEffect, useState } from "react"
 
 export function Paginador() {
-    const [arrNumber, setArrNumber] = useState([]);
-    const [min, setMin] = useState(1);
-    const { page, total, setPage, setPersonajeState } = useContext(personajesContext)
+    const context = useContext(personajesContext);
+    if (!context) { return null; }
+    const { page, total, setPage, setPersonajeState, setPaginador, arrNumber, min } = context;
 
     const handleclick = (event: MouseEvent, page: number) => {
-        setPersonajeState(page)
+        setPersonajeState(page, "", "")
         setPaginador(total, 10, page);
     };
 
-    const setPaginador = (totalPage: number, limit: number, page: number) => {
-        let paginationNumbers = [];
-        setMin(page)
-        if (totalPage == 0 || totalPage == undefined) {
-            for (let i = 0; i <= 10; i++) {
-                paginationNumbers.push(i);
-                setArrNumber(paginationNumbers);
-            }
-        }
-        else {
-            for (let x = 1; x <= 10; x++) {
-                if ((x + page) <= totalPage + 2) {
-                    paginationNumbers.push(x + page);
-                }
-                else {
-                    setMin(1);
-                    setPage(1);
-                    if (page == 1) {
-                        for (let i = 0; i <= 10; i++) {
-                            paginationNumbers.push(i);
-                            setArrNumber(paginationNumbers);
-                        }
-                    }
-                }
-                setArrNumber(paginationNumbers);
-            }
-        }
-    }
+
+
     useEffect(() => {
-        setPersonajeState(1);
+        setPersonajeState(1, "", "");
         setPaginador(total, 10, page);
     }, []);
 
@@ -51,7 +25,7 @@ export function Paginador() {
         {
             arrNumber.map((row: any, f: number) => (
                 <div key={f}>
-                    <button className="join-item btn btn-xs" onClick={(event) => handleclick(event, min + (f + 1))}>{min + (f)}</button>
+                    <button className="join-item btn btn-xs items-center" onClick={(event) => handleclick(event, min + (f + 1))}>{min + (f)}</button>
                 </div>
 
             ))

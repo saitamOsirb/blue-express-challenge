@@ -5,29 +5,83 @@ import { getPersonajes } from "../service/Personaje.services";
 import { arrayChunk } from "@/app/shared/tools/generic";
 
 export function PersonajesState({ children }) {
+    const [arrNumber, setArrNumber] = useState([]);
+    const [min, setMin] = useState(1);
     const [personajes, setPersonajes] = useState([]);
+    const [inputName, setInputName] = useState("");
+    const [selectInput, setSelectInput] = useState("");
     const [page, setPage] = useState(0);
     const [total, setTotal] = useState(0);
-    const setPersonajeState = async (page: number) => {
-        let response = await getPersonajes(page);
+    const [width, setWidth] = useState(window.innerWidth);
+    const [height, setHeight] = useState(window.innerHeight);
+
+    const updateDimensions = () => {
+        setWidth(window.innerWidth);
+        setHeight(window.innerHeight);
+    }
+
+    const setPersonajeState = async (page: number, name: string, status: string) => {
+        let response = await getPersonajes(page, name || "", status || "");
         let listPersonaje: any = arrayChunk(response.results, 5);
         setPersonajes(listPersonaje);
         setPage(page);
-        let total =  response.info.pages;
+        let total = response.info.pages;
         setTotal(total);
     };
+
+    const setPaginador = (totalPage: number, limit: number, page: number) => {
+        let paginationNumbers = [];
+        setMin(page)
+        if (totalPage == 0 || totalPage == undefined) {
+            for (let i = 0; i <= 10; i++) {
+                paginationNumbers.push(i);
+                setArrNumber(paginationNumbers);
+            }
+        }
+        else {
+            for (let x = 1; x <= 10; x++) {
+                if ((x + page) <= totalPage + 2) {
+                    paginationNumbers.push(x + page);
+                }
+                else {
+                    setMin(1);
+                    setPage(1);
+                    if (page == 1) {
+                        for (let i = 0; i <= 10; i++) {
+                            paginationNumbers.push(i);
+                            setArrNumber(paginationNumbers);
+                        }
+                    }
+                }
+                setArrNumber(paginationNumbers);
+            }
+        }
+    }
+
     useEffect(() => {
-        setPersonajeState(1);
+        setPersonajeState(1, inputName, selectInput);
+        window.addEventListener("resize", updateDimensions);
+        return () => window.removeEventListener("resize", updateDimensions);
     }, []);
+
+
     return <personajesContext.Provider
         value={{
             personajes,
             page,
             total,
+            width,
+            height,
+            window,
             setPersonajes,
             setPage,
             setPersonajeState,
-            setTotal
+            setTotal,
+            selectInput,
+            setSelectInput,
+            inputName, setInputName,
+            arrNumber, setArrNumber,
+            min, setMin, setPaginador
         }}
     >
         {children}
