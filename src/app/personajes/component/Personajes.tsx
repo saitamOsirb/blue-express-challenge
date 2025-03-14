@@ -8,7 +8,6 @@ import { StatusAlive } from "./status/component/StatusAlive";
 
 export function Personajes() {
     const [personajes, setPersonajes] = useState([]);
-    const [split, setSplit] = useState(0);
     const [paginations, setPagination] = useState([]);
 
     useEffect(() => {
