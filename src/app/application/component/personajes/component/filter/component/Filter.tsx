@@ -1,7 +1,7 @@
 
 'use client'
 
-import { personajesContext } from "@/app/personajes/context/personajesContext";
+import { personajesContext } from "@/app/application/component/personajes/context/personajesContext";
 import { useContext, useState } from "react";
 
 export function Filter(this: any) {

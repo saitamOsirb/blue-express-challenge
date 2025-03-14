@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Personajes } from "./personajes/component/Personajes";
+import { LayoutState } from "./context/layoutState";
+import { Application } from "./application/component/Application";
 import { NavBar } from "./shared/navbar/component/NavBar";
 import { Footer } from "./shared/footer/component/Footer";
-import { PersonajesState } from "./personajes/context/personajesState";
+import { useContext } from "react";
+import { layoutContext } from "./context/layoutContext";
+import { UbicacionState } from "./application/component/ubicaciones/context/ubicacion.state";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,19 +29,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavBar></NavBar>
-        <PersonajesState>
-
-          <Personajes></Personajes>
-
-          <br />
-          <Footer></Footer>
-        </PersonajesState>
+        <UbicacionState>
+          <LayoutState>
+            <NavBar></NavBar>
+            <Application>
+            </Application>
+            <Footer></Footer>
+          </LayoutState>
+        </UbicacionState>
       </body>
     </html>
   );

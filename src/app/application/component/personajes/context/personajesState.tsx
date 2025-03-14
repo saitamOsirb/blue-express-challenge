@@ -15,7 +15,7 @@ export function PersonajesState({ children }) {
     const [width, setWidth] = useState(0)
     const [height, setHeight] = useState(0)
     const [personaje, setPersonaje] = useState({})
-
+    const [episodios, setEpisodios] = useState([]);
     const updateDimensions = () => {
         setWidth(window.innerWidth);
         setHeight(window.innerHeight);
@@ -78,11 +78,12 @@ export function PersonajesState({ children }) {
             setPage,
             setPersonajeState,
             setTotal,
-            selectInput,setSelectInput,
+            selectInput, setSelectInput,
             inputName, setInputName,
             arrNumber, setArrNumber,
             min, setMin, setPaginador,
-            personaje, setPersonaje
+            personaje, setPersonaje,
+            episodios, setEpisodios
         }}
     >
         {children}
