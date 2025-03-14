@@ -1,13 +1,10 @@
-
-
 import { EndPointPersonajes } from "@/app/shared/tools/endPoint";
 import axios from "axios";
-import { Personajes } from "../component/Personajes";
 
 
-const getPersonajes = async () => {
+const getPersonajes = async (page: number) => {
     let url = EndPointPersonajes;
-    let response = await axios.get(url);
+    let response = await axios.get(url + page);
     return response.data;
 };
 
