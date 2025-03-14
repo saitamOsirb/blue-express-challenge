@@ -2,4 +2,4 @@
 
 import { createContext } from "react";
 
-export const personajesContext = createContext();
+export const personajesContext = createContext(null);
