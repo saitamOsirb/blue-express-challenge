@@ -12,8 +12,10 @@ export function PersonajesState({ children }) {
     const [selectInput, setSelectInput] = useState("");
     const [page, setPage] = useState(0);
     const [total, setTotal] = useState(0);
-    const [width, setWidth] = useState(window.innerWidth);
-    const [height, setHeight] = useState(window.innerHeight);
+    // const [width, setWidth] = useState(window.innerWidth);
+    //const [height, setHeight] = useState(window.innerHeight);
+    const [width, setWidth] = useState(0)
+    const [height, setHeight] = useState(0)
 
     const updateDimensions = () => {
         setWidth(window.innerWidth);
@@ -21,16 +23,16 @@ export function PersonajesState({ children }) {
     }
 
     const setPersonajeState = async (page: number, name: string, status: string) => {
-        let response = await getPersonajes(page, name || "", status || "");
-        let listPersonaje: any = arrayChunk(response.results, 5);
+        const response = await getPersonajes(page, name || "", status || "");
+        const listPersonaje: any = arrayChunk(response.results, 5);
         setPersonajes(listPersonaje);
         setPage(page);
-        let total = response.info.pages;
+        const total = response.info.pages;
         setTotal(total);
     };
 
     const setPaginador = (totalPage: number, limit: number, page: number) => {
-        let paginationNumbers = [];
+        const paginationNumbers = [];
         setMin(page)
         if (totalPage == 0 || totalPage == undefined) {
             for (let i = 0; i <= 10; i++) {

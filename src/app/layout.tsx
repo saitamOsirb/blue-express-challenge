@@ -5,8 +5,6 @@ import { Personajes } from "./personajes/component/Personajes";
 import { NavBar } from "./shared/navbar/component/NavBar";
 import { Footer } from "./shared/footer/component/Footer";
 import { PersonajesState } from "./personajes/context/personajesState";
-import { Paginador } from "./personajes/component/paginador/component/Paginador";
-import { Filter } from "./personajes/component/filter/component/Filter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

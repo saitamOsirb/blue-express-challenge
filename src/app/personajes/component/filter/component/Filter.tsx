@@ -5,7 +5,7 @@ import { personajesContext } from "@/app/personajes/context/personajesContext";
 import { useContext, useState } from "react";
 
 export function Filter(this: any) {
-    let currentValue = "DEFAULT";
+    const currentValue = "DEFAULT";
 
     const context = useContext(personajesContext);
     if (!context) {
@@ -23,14 +23,14 @@ export function Filter(this: any) {
 
     const handleChange = (event: any) => {
         setSelectInput(event.target.value);
-        setPersonajeState(1, inputName, event.target.value);
+        setPersonajeState(page, inputName, event.target.value);
         setPaginador(total, 10, page);
     };
 
     const handleInputChange = (event: any) => {
         setInputName(event.target.value)
-        setPersonajeState(1, event.target.value, selectInput);
-        setPage(1);
+        setPersonajeState(page, event.target.value, selectInput);
+        setPage(page);
     };
     return <div className="join">
         <div>

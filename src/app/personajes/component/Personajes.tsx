@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useState } from "react"
+import { useContext } from "react"
 
 import { StatusDeath } from "./status/component/StatusDeath";
 import { StatusUnknown } from "./status/component/StatusUnknown";
@@ -9,7 +9,7 @@ import { Filter } from "./filter/component/Filter";
 import { Paginador } from "./paginador/component/Paginador";
 
 export function Personajes() {
-    const { personajes, setPersonajes, width, height, } = useContext(personajesContext)
+    const { personajes, width} = useContext(personajesContext)
     return <div>
         <br />
         {
