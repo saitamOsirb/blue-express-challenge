@@ -7,17 +7,17 @@ import { useContext, useEffect, useState } from "react"
 export function Paginador() {
     const context = useContext(personajesContext);
     if (!context) { return null; }
-    const { page, total, setPage, setPersonajeState, setPaginador, arrNumber, min } = context;
+    const { page, total, setPage, setPersonajeState, setPaginador, arrNumber, min,selectInput,inputName } = context;
 
     const handleclick = (event: MouseEvent, page: number) => {
-        setPersonajeState(page, "", "")
+        setPersonajeState(page, inputName, selectInput)
         setPaginador(total, 10, page);
     };
 
 
 
     useEffect(() => {
-        setPersonajeState(1, "", "");
+        setPersonajeState(1, inputName, selectInput);
         setPaginador(total, 10, page);
     }, []);
 
