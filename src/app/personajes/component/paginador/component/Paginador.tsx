@@ -12,12 +12,9 @@ export function Paginador() {
 
     function handleclick(page: number){
         setPersonajeState(page, inputName, selectInput)
-        console.log(page + " " + total);
         setPaginador(total, 10, page);
     }
   
-
-
 
     useEffect(() => {
         setPersonajeState(1, inputName, selectInput);

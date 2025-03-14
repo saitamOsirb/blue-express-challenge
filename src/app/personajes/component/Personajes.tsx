@@ -1,5 +1,5 @@
 'use client'
-import { useContext } from "react"
+import { useContext, useState } from "react"
 
 import { StatusDeath } from "./status/component/StatusDeath";
 import { StatusUnknown } from "./status/component/StatusUnknown";
@@ -7,9 +7,10 @@ import { StatusAlive } from "./status/component/StatusAlive";
 import { personajesContext } from "../context/personajesContext";
 import { Filter } from "./filter/component/Filter";
 import { Paginador } from "./paginador/component/Paginador";
-
+import { getEpisodeInfo } from "../service/Personaje.services";
 export function Personajes() {
-    const { personajes, width} = useContext(personajesContext)
+    const { personajes, width, personaje, setPersonaje } = useContext(personajesContext)
+    const [episodios, setEpisodios] = useState([]);
     return <div>
         <br />
         {
@@ -41,7 +42,7 @@ export function Personajes() {
                     {
                         personajes[i].map((row: any, f: number) => (
                             <div key={f}>
-                                <div>
+                                <div >
                                     <img className="size-48 shadow-xl rounded-md" alt="" src={row.image} />
                                     <p><b>Nombre:</b> <br />{row.name}</p>
                                     <p><b>Tipo:</b> <br />{row.type == "" ? 'unknown' : row.type}</p>
@@ -50,6 +51,16 @@ export function Personajes() {
                                     {row.status == "Dead" && <StatusDeath />}
                                     {row.status == "Alive" && <StatusAlive />}
                                     {row.status == "unknown" && <StatusUnknown />}
+                                    <button className="btn" onClick={async () => {
+                                        document.getElementById('my_modal_1').showModal();
+                                        setPersonaje(personajes[i][f]);
+                                        let episodes = [];
+                                        for (let z = 0; z < personajes[i][f].episode.length; z++) {
+                                            let episode = await getEpisodeInfo(personajes[i][f].episode[z]);
+                                            episodes.push(episode);
+                                        }
+                                        setEpisodios(episodes);
+                                    }}>Episodios</button>
                                 </div>
                             </div>
 
@@ -60,5 +71,31 @@ export function Personajes() {
             ))
         }
 
+
+        <dialog id="my_modal_1" className="modal">
+            <div className="modal-box">
+                <h3 className="font-bold text-lg">{personaje.name}</h3>
+
+
+                <div className="modal-action">
+                    <form method="dialog">
+                        {
+                            episodios.map((row: any, n: number) => (
+                                <div key={n}>
+                                    <div >
+                                        <p>Nombre: {row.name}</p>
+                                        <p>Episodio:  {row.episode}</p>
+                                        <p>Fecha:  {row.air_date}</p>
+                                        <br />
+                                    </div>
+                                </div>
+
+                            ))
+                        }
+                        <button className="btn">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
     </div >
 }

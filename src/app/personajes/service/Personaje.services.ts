@@ -8,4 +8,8 @@ const getPersonajes = async (page: number, name: string, status: string) => {
     return response.data;
 };
 
-export { getPersonajes };
+const getEpisodeInfo = async (url:string) => {
+    const response = await axios.get(url);
+    return response.data;
+};
+export { getPersonajes, getEpisodeInfo };

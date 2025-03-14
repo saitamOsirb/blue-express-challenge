@@ -33,9 +33,9 @@ export default function RootLayout({
       >
         <NavBar></NavBar>
         <PersonajesState>
-          
+
           <Personajes></Personajes>
-         
+
           <br />
           <Footer></Footer>
         </PersonajesState>
