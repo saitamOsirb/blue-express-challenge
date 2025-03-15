@@ -17,20 +17,19 @@ export function Filter(this: any) {
         inputName,
         setInputName,
         setPage,
-        setPaginador,
-        page, total } = context;
+        page } = context;
 
 
     const handleChange = (event: any) => {
         setSelectInput(event.target.value);
         setPersonajeState(page, inputName, event.target.value);
-        setPaginador(total, 10, page);
+        setPage(1);
     };
 
     const handleInputChange = (event: any) => {
         setInputName(event.target.value)
         setPersonajeState(page, event.target.value, selectInput);
-        setPage(page);
+        setPage(1);
     };
     return <div className="join">
         <div>

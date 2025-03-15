@@ -7,7 +7,11 @@ import { ModalPersonajesEpisodios } from "./modal/component/Modal-Personajes-Epi
 
 export function Episodios() {
 
-    const { episodios, setEpisodioState, characters, setCharacters, getCharacter } = useContext(layoutContext)
+    const context = useContext(layoutContext);
+    if (!context) {
+        return null;
+    }
+    const { episodios, setEpisodioState, characters, setCharacters, getCharacter } = context;
 
     useEffect(() => {
         setEpisodioState();
@@ -33,7 +37,11 @@ export function Episodios() {
                         <th>
                             <button className="btn btn-active btn-primary"
                                 onClick={async () => {
-                                    document.getElementById('modalResidentesEpisodios').showModal();
+                                    let modal: HTMLInputElement = document.getElementById('modalResidentesEpisodios');
+                                    modal.showModal();
+                                    //document.getElementById('modalResidentesEpisodios').showModal();
+                                    //const modal = (document.getElementById("modalResidentesEpisodios") as HTMLElement | null);
+                                    //modal.show.showModal();
                                     let character = [];
                                     for (let z = 0; z < episodios[i].characters.length; z++) {
                                         let char = await getCharacter(episodios[i].characters[z]);

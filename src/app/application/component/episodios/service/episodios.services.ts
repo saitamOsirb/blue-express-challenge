@@ -6,9 +6,10 @@ const getEpisodios = async () => {
     const response = await axios.get(url);
     return response.data;
 };
-const getCharacterByUrl = async (url:string) => {
+
+const getCharacterByUrl = async (url: string) => {
     const response = await axios.get(url);
     return response;
 };
 
-export { getEpisodios ,getCharacterByUrl};
+export { getEpisodios, getCharacterByUrl };

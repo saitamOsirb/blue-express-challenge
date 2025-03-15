@@ -7,35 +7,25 @@ import { useContext, useEffect } from "react"
 export function Paginador() {
     const context = useContext(personajesContext);
     if (!context) { return null; }
-    const { page, total, setPersonajeState, setPaginador, arrNumber, min, selectInput, inputName } = context;
+    const { page, total, setPersonajeState, selectInput, inputName } = context;
 
 
-    function handleclick(page: number) {
-        setPersonajeState(page, inputName, selectInput)
-        setPaginador(total, 10, page);
+    const handleBackClick = (page: number) => {
+        return (event: React.MouseEvent) => {
+            if (page != 1) {
+                setPersonajeState((page - 1), selectInput, inputName)
+            }
+        }
+    }
+    const handleNextClick = (page: number, maxPage: number) => {
+        return (event: React.MouseEvent) => {
+            setPersonajeState((page + 1), selectInput, inputName)
+        }
     }
 
-
-    useEffect(() => {
-        setPersonajeState(1, inputName, selectInput);
-        setPaginador(total, 10, page);
-    }, []);
-
-    return <div className="join">
-        {
-            arrNumber.map((row: any, f: number) => (
-                <div key={f}>
-                    <button className="join-item btn btn-xs items-center"
-                        onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleclick((min + (f + 1)))}
-                    >
-                        {min + (f)}
-
-                    </button>
-                </div>
-
-            ))
-        }
-
-
+    return <div>
+        <button className="btn btn-xs" onClick={handleBackClick(page)}>{"<"}</button>
+        <button className="btn btn-xs" disabled>{page}</button>
+        <button className="btn btn-xs" onClick={handleNextClick(page, total)}>{">"}</button>
     </div>
 }

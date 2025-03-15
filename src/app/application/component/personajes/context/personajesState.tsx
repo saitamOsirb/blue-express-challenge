@@ -30,35 +30,6 @@ export function PersonajesState({ children }) {
         setTotal(total);
     };
 
-    const setPaginador = (totalPage: number, limit: number, page: number) => {
-        const paginationNumbers = [];
-        setMin(page)
-        if (totalPage == 0 || totalPage == undefined) {
-            for (let i = 0; i <= 10; i++) {
-                paginationNumbers.push(i);
-                setArrNumber(paginationNumbers);
-            }
-        }
-        else {
-            for (let x = 1; x <= 10; x++) {
-                if ((x + page) <= totalPage + 2) {
-                    paginationNumbers.push(x + page);
-                }
-                else {
-                    setMin(1);
-                    setPage(1);
-                    if (page == 1) {
-                        for (let i = 0; i <= 10; i++) {
-                            paginationNumbers.push(i);
-                            setArrNumber(paginationNumbers);
-                        }
-                    }
-                }
-                setArrNumber(paginationNumbers);
-            }
-        }
-    }
-
     useEffect(() => {
         setPersonajeState(1, inputName, selectInput);
         window.addEventListener("resize", updateDimensions);
@@ -81,7 +52,7 @@ export function PersonajesState({ children }) {
             selectInput, setSelectInput,
             inputName, setInputName,
             arrNumber, setArrNumber,
-            min, setMin, setPaginador,
+            min, setMin,
             personaje, setPersonaje,
             episodios, setEpisodios
         }}

@@ -4,7 +4,6 @@ import { layoutContext } from "./layoutContext";
 import { getEpisodios, getCharacterByUrl } from "../application/component/episodios/service/episodios.services";
 
 export function LayoutState({ children }) {
-    const [ruta, setRuta] = useState([]);
     const [episodios, setEpisodios] = useState([]);
 
     const [characters, setCharacters] = useState([]);
@@ -20,7 +19,6 @@ export function LayoutState({ children }) {
 
     return <layoutContext.Provider
         value={{
-            ruta, setRuta,
             episodios, setEpisodios, setEpisodioState, characters, setCharacters, getCharacter
         }}
     >

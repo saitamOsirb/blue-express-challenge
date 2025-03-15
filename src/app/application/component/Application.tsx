@@ -13,7 +13,7 @@ import { Personajes } from "./personajes/component/Personajes"
 import { Episodios } from "./episodios/component/Episodios";
 
 export function Application() {
-    const { ruta } = useContext(layoutContext)
+
     return <div>
         
         <PersonajesState>

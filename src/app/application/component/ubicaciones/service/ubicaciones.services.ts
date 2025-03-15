@@ -8,7 +8,6 @@ const getUbicaciones = async () => {
 };
 
 const getResident = async (url: string) => {
-    console.log(url);
     const response = await axios.get(url);
     return response.data;
 };
