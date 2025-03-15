@@ -37,11 +37,9 @@ export function Episodios() {
                         <th>
                             <button className="btn btn-active btn-primary"
                                 onClick={async () => {
-                                    let modal: HTMLInputElement = document.getElementById('modalResidentesEpisodios');
-                                    modal.showModal();
-                                    //document.getElementById('modalResidentesEpisodios').showModal();
-                                    //const modal = (document.getElementById("modalResidentesEpisodios") as HTMLElement | null);
-                                    //modal.show.showModal();
+                                    const modal =document.getElementById('modalResidentesEpisodios');
+                                    (modal as any).showModal();
+                                    
                                     let character = [];
                                     for (let z = 0; z < episodios[i].characters.length; z++) {
                                         let char = await getCharacter(episodios[i].characters[z]);

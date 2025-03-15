@@ -53,7 +53,11 @@ export function Personajes() {
                                     {row.status == "Alive" && <StatusAlive />}
                                     {row.status == "unknown" && <StatusUnknown />}
                                     <button className="btn" onClick={async () => {
-                                        document.getElementById('my_modal_1').showModal();
+
+
+                                        const modal = document.getElementById('my_modal_1');
+                                        (modal as any).showModal();
+
                                         setPersonaje(personajes[i][f]);
                                         let episodes = [];
                                         for (let z = 0; z < personajes[i][f].episode.length; z++) {
