@@ -7,10 +7,11 @@ const getUbicaciones = async () => {
     return response.data;
 };
 
-const getResidente = async (url: string) => {
+const getResident = async (url: string) => {
+    console.log(url);
     const response = await axios.get(url);
     return response.data;
 };
 
 
-export { getUbicaciones, getResidente };
+export { getUbicaciones, getResident };

@@ -10,6 +10,7 @@ import {
 import { Ubicaciones } from "./ubicaciones/component/Ubicaciones"
 import { PersonajesState } from "./personajes/context/personajesState"
 import { Personajes } from "./personajes/component/Personajes"
+import { Episodios } from "./episodios/component/Episodios";
 
 export function Application() {
     const { ruta } = useContext(layoutContext)
@@ -21,7 +22,7 @@ export function Application() {
                     <Route path="/" element={<Personajes />} />
                     <Route path="/personajes" element={<Personajes />} />
                     <Route path="/ubicaciones" element={<Ubicaciones />} />
-                    <Route path="/episodios" element={<Personajes />} />
+                    <Route path="/episodios" element={<Episodios/>} />
                 </Routes>
             </BrowserRouter>,
         </PersonajesState>

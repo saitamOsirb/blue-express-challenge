@@ -10,15 +10,14 @@ export function Paginador() {
     const { page, total, setPersonajeState, setPaginador, arrNumber, min, selectInput, inputName } = context;
 
 
-    function handleclick(page: number){
+    function handleclick(page: number) {
         setPersonajeState(page, inputName, selectInput)
         setPaginador(total, 10, page);
     }
-  
+
 
     useEffect(() => {
         setPersonajeState(1, inputName, selectInput);
-
         setPaginador(total, 10, page);
     }, []);
 
@@ -28,9 +27,9 @@ export function Paginador() {
                 <div key={f}>
                     <button className="join-item btn btn-xs items-center"
                         onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleclick((min + (f + 1)))}
-                        >
-                            {min + (f)}
-                        
+                    >
+                        {min + (f)}
+
                     </button>
                 </div>
 

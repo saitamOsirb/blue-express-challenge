@@ -8,6 +8,8 @@ import { Footer } from "./shared/footer/component/Footer";
 import { useContext } from "react";
 import { layoutContext } from "./context/layoutContext";
 import { UbicacionState } from "./application/component/ubicaciones/context/ubicacion.state";
+import { EpisodioState } from "./application/component/episodios/context/episodioState";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,14 +37,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <UbicacionState>
-          <LayoutState>
-            <NavBar></NavBar>
-            <Application>
-            </Application>
-            <Footer></Footer>
-          </LayoutState>
-        </UbicacionState>
+        
+          <UbicacionState>
+            <LayoutState>
+              <NavBar></NavBar>
+              <Application>
+              </Application>
+              <Footer></Footer>
+            </LayoutState>
+            
+          </UbicacionState>
+       
       </body>
     </html>
   );
