@@ -8,10 +8,7 @@ export function LayoutState({ children }) {
 
     const [characters, setCharacters] = useState([]);
 
-    const setEpisodioState = async (page: number, name: string, status: string) => {
-        const response = await getEpisodios();
-        setEpisodios(response.results);
-    };
+
     const getCharacter = async (url: string) => {
         const response = await getCharacterByUrl(url);
         return response.data;
@@ -19,7 +16,7 @@ export function LayoutState({ children }) {
 
     return <layoutContext.Provider
         value={{
-            episodios, setEpisodios, setEpisodioState, characters, setCharacters, getCharacter
+            episodios, setEpisodios, characters, setCharacters, getCharacter
         }}
     >
         {children}

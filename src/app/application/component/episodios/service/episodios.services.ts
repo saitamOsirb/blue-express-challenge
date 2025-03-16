@@ -9,7 +9,9 @@ const getEpisodios = async () => {
 
 const getCharacterByUrl = async (url: string) => {
     const response = await axios.get(url);
-    return response;
+    return response.data;
 };
+
+
 
 export { getEpisodios, getCharacterByUrl };

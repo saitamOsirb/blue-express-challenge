@@ -1,17 +1,22 @@
 'use client'
 
-import { useContext, useEffect } from "react"
-import { getEpisodios } from "../service/episodios.services";
-import { layoutContext } from "@/app/context/layoutContext";
+import { useContext, useEffect, useState } from "react"
 import { ModalPersonajesEpisodios } from "./modal/component/Modal-Personajes-Episodios";
+import { EpisodioContext } from "../context/episodioContext";
+import { getCharacterByUrl, getEpisodios } from "../service/episodios.services";
 
 export function Episodios() {
 
-    const context = useContext(layoutContext);
-    if (!context) {
-        return null;
-    }
-    const { episodios, setEpisodioState, characters, setCharacters, getCharacter } = context;
+    const context = useContext(EpisodioContext);
+    if (!context) { return null; }
+    const { episodios, setCharacters } = context;
+
+    const [listEpisodios, setListEpisodios] = useState([]);
+
+    const setEpisodioState = async () => {
+        const response = await getEpisodios();
+        setListEpisodios(response.results);
+    };
 
     useEffect(() => {
         setEpisodioState();
@@ -28,7 +33,7 @@ export function Episodios() {
                 </tr>
             </thead>
             <tbody>
-                {episodios.map((row: any, i: number) => (
+                {listEpisodios.map((row: any, i: number) => (
                     <tr key={i}>
                         <th>{row.id}</th>
                         <th>{row.name}</th>
@@ -37,15 +42,13 @@ export function Episodios() {
                         <th>
                             <button className="btn btn-active btn-primary"
                                 onClick={async () => {
-                                    const modal =document.getElementById('modalResidentesEpisodios');
+                                    const modal = document.getElementById('modalResidentesEpisodios');
                                     (modal as any).showModal();
-                                    
                                     let character = [];
-                                    for (let z = 0; z < episodios[i].characters.length; z++) {
-                                        let char = await getCharacter(episodios[i].characters[z]);
-                                        character.push(char);
+                                    for (let z = 0; z < row.characters.length; z++) {
+                                        character.push(await getCharacterByUrl(row.characters[z]));
                                     }
-                                    setCharacters(character)
+                                    setCharacters(character);
                                 }}
 
                             >ver</button>

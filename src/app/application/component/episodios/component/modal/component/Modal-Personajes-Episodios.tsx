@@ -1,11 +1,14 @@
 'use client'
-
-import { layoutContext } from "@/app/context/layoutContext"
 import { useContext } from "react"
+import { EpisodioContext } from "../../../context/episodioContext"
 
 export function ModalPersonajesEpisodios() {
-    const { characters } = useContext(layoutContext)
+    const context = useContext(EpisodioContext);
+    if (!context) { return null; }
+    const { characters } = context;
 
+
+    
     return <dialog id="modalResidentesEpisodios" className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg"></h3>

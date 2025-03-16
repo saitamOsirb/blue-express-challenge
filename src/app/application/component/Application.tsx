@@ -11,6 +11,7 @@ import { Ubicaciones } from "./ubicaciones/component/Ubicaciones"
 import { PersonajesState } from "./personajes/context/personajesState"
 import { Personajes } from "./personajes/component/Personajes"
 import { Episodios } from "./episodios/component/Episodios";
+import { EpisodioState } from "./episodios/context/episodioState";
 
 export function Application() {
 
@@ -22,7 +23,7 @@ export function Application() {
                     <Route path="/" element={<Personajes />} />
                     <Route path="/personajes" element={<Personajes />} />
                     <Route path="/ubicaciones" element={<Ubicaciones />} />
-                    <Route path="/episodios" element={<Episodios/>} />
+                    <Route path="/episodios" element={<EpisodioState><Episodios/></EpisodioState>} />
                 </Routes>
             </BrowserRouter>,
         </PersonajesState>
