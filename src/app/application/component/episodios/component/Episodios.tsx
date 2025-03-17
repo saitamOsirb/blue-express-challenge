@@ -1,15 +1,14 @@
 'use client'
 
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { ModalPersonajesEpisodios } from "./modal/component/Modal-Personajes-Episodios";
 import { EpisodioContext } from "../context/episodioContext";
-import { getCharacterByUrl } from "../service/episodios.services";
 
 export function Episodios() {
 
     const context = useContext(EpisodioContext);
     if (!context) { return null; }
-    const { episodios, setCharacters, setEpisodio } = context;
+    const { episodios, sendDataToModal} = context;
 
     return <div className="overflow-x-auto">
         <table className="table">
@@ -32,19 +31,7 @@ export function Episodios() {
                         <th>
                             <button className="btn btn-active btn-primary"
                                 onClick={async () => {
-                                    const modal = document.getElementById('modalResidentesEpisodios');
-                                    (modal as any).showModal();
-
-                                    let character = [];
-                                    for (let z = 0; z < episodios[i].characters.length; z++) {
-                                        let info = await getCharacterByUrl(row.characters[z]);
-                                        info.name_episode = row.name;
-                                        info.episode = row.episode;
-                                        info.air_date = row.air_date;
-                                        character.push(info);
-                                    }
-                                    setEpisodio(row);
-                                    setCharacters(character)
+                                    sendDataToModal(row)
                                 }}
 
                             >ver</button>

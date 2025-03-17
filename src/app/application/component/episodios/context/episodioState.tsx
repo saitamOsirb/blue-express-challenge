@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { EpisodioContext } from "./episodioContext";
-import { getEpisodios } from "../service/episodios.services";
+import { getCharacterByUrl, getEpisodios } from "../service/episodios.services";
 
 
 export function EpisodioState({ children }) {
@@ -14,6 +14,21 @@ export function EpisodioState({ children }) {
         setEpisodios(response.results);
     };
 
+    const sendDataToModal = async (row: any) => {
+        const modal = document.getElementById('modalResidentesEpisodios');
+        (modal as any).showModal();
+
+        let character = [];
+        for (let z = 0; z < row.characters.length; z++) {
+            let info = await getCharacterByUrl(row.characters[z]);
+            info.name_episode = row.name;
+            info.episode = row.episode;
+            info.air_date = row.air_date;
+            character.push(info);
+        }
+        setEpisodio(row);
+        setCharacters(character)
+    }
     useEffect(() => {
         setEpisodioState();
     }, []);
@@ -22,6 +37,7 @@ export function EpisodioState({ children }) {
         value={{
             episodios, setEpisodios, setEpisodioState,
             episodio, setEpisodio,
+            sendDataToModal,
             characters, setCharacters
         }}
     >
