@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { LayoutState } from "./context/layoutState";
 import { Application } from "./application/component/Application";
 import { NavBar } from "./shared/navbar/component/NavBar";
 import { Footer } from "./shared/footer/component/Footer";
@@ -33,15 +32,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <LayoutState>
-          <UbicacionState>
             <NavBar></NavBar>
             <Application>
             </Application>
             <Footer></Footer>
-          </UbicacionState>
-        </LayoutState>
-
       </body>
     </html>
   );

@@ -1,6 +1,5 @@
 "use client"
 import { useContext } from "react"
-import { layoutContext } from "@/app/context/layoutContext"
 import {
     BrowserRouter as Router,
     Route,
@@ -12,21 +11,33 @@ import { PersonajesState } from "./personajes/context/personajesState"
 import { Personajes } from "./personajes/component/Personajes"
 import { Episodios } from "./episodios/component/Episodios";
 import { EpisodioState } from "./episodios/context/episodioState";
+import { UbicacionState } from "./ubicaciones/context/ubicacion.state";
 
 export function Application() {
 
     return <div>
-        
-        <PersonajesState>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Personajes />} />
-                    <Route path="/personajes" element={<Personajes />} />
-                    <Route path="/ubicaciones" element={<Ubicaciones />} />
-                    <Route path="/episodios" element={<EpisodioState><Episodios/></EpisodioState>} />
-                </Routes>
-            </BrowserRouter>,
-        </PersonajesState>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={
+                    <PersonajesState>
+                        <Personajes />
+                    </PersonajesState>} />
+                <Route path="/personajes" element={
+                    <PersonajesState>
+                        <Personajes />
+                    </PersonajesState>} />
+                <Route path="/ubicaciones" element={
+                    <UbicacionState><Ubicaciones /></UbicacionState>
+
+                } />
+                <Route path="/episodios" element={
+                    <EpisodioState>
+                        <Episodios />
+                    </EpisodioState>
+                } />
+            </Routes>
+        </BrowserRouter>,
+
         <br />
     </div>
 }

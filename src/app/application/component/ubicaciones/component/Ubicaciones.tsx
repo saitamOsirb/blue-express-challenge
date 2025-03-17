@@ -31,7 +31,8 @@ export function Ubicaciones() {
                         <th>{
                             <button className="btn btn-active btn-primary"
                                 onClick={async () => {
-                                    document.getElementById('modalResidentes').showModal();
+                                    const modal = document.getElementById('modalResidentes');
+                                    (modal as any).showModal();
                                     let residentes = [];
                                     for (let z = 0; z < ubicaciones[i].residents.length; z++) {
                                         let residente = await getResident(ubicaciones[i].residents[z]);

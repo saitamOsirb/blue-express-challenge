@@ -12,6 +12,8 @@ export function UbicacionState({ children }) {
         const response = await getUbicaciones();
         setUbicaciones(response.results);
     };
+
+   
     return <ubicacionContext.Provider
         value={{
             ubicaciones, setUbicaciones, setUbicacioneState, residentes, setResidentes

@@ -6,16 +6,22 @@ import { getEpisodios } from "../service/episodios.services";
 
 export function EpisodioState({ children }) {
     const [episodios, setEpisodios] = useState([]);
+    const [episodio, setEpisodio] = useState([]);
     const [characters, setCharacters] = useState([]);
 
-   
+    const setEpisodioState = async () => {
+        const response = await getEpisodios();
+        setEpisodios(response.results);
+    };
+
     useEffect(() => {
-       
+        setEpisodioState();
     }, []);
 
     return <EpisodioContext.Provider
         value={{
-            episodios, setEpisodios,
+            episodios, setEpisodios, setEpisodioState,
+            episodio, setEpisodio,
             characters, setCharacters
         }}
     >

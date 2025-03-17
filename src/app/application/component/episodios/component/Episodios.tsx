@@ -3,24 +3,14 @@
 import { useContext, useEffect, useState } from "react"
 import { ModalPersonajesEpisodios } from "./modal/component/Modal-Personajes-Episodios";
 import { EpisodioContext } from "../context/episodioContext";
-import { getCharacterByUrl, getEpisodios } from "../service/episodios.services";
+import { getCharacterByUrl } from "../service/episodios.services";
 
 export function Episodios() {
 
     const context = useContext(EpisodioContext);
     if (!context) { return null; }
-    const { episodios, setCharacters } = context;
+    const { episodios, setCharacters, setEpisodio } = context;
 
-    const [listEpisodios, setListEpisodios] = useState([]);
-
-    const setEpisodioState = async () => {
-        const response = await getEpisodios();
-        setListEpisodios(response.results);
-    };
-
-    useEffect(() => {
-        setEpisodioState();
-    }, []);
     return <div className="overflow-x-auto">
         <table className="table">
             <thead>
@@ -33,7 +23,7 @@ export function Episodios() {
                 </tr>
             </thead>
             <tbody>
-                {listEpisodios.map((row: any, i: number) => (
+                {episodios.map((row: any, i: number) => (
                     <tr key={i}>
                         <th>{row.id}</th>
                         <th>{row.name}</th>
@@ -44,11 +34,17 @@ export function Episodios() {
                                 onClick={async () => {
                                     const modal = document.getElementById('modalResidentesEpisodios');
                                     (modal as any).showModal();
+
                                     let character = [];
-                                    for (let z = 0; z < row.characters.length; z++) {
-                                        character.push(await getCharacterByUrl(row.characters[z]));
+                                    for (let z = 0; z < episodios[i].characters.length; z++) {
+                                        let info = await getCharacterByUrl(row.characters[z]);
+                                        info.name_episode = row.name;
+                                        info.episode = row.episode;
+                                        info.air_date = row.air_date;
+                                        character.push(info);
                                     }
-                                    setCharacters(character);
+                                    setEpisodio(row);
+                                    setCharacters(character)
                                 }}
 
                             >ver</button>
