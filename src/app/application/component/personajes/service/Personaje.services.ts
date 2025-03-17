@@ -3,14 +3,27 @@ import axios from "axios";
 
 
 const getPersonajes = async (page: number, name: string, status: string) => {
-    const url:string = EndPointPersonajes;
-    const response = await axios.get(url + "?name=" + name + "&status=" + status + "&page=" + page);
-    return response.data;
+    const url: string = EndPointPersonajes;
+    return await axios.get(url + "?name=" + name + "&status=" + status + "&page=" + page)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            console.log(error);
+            return error;
+        });
 };
 
-const getEpisodeInfo = async (url:string) => {
-    const response = await axios.get(url);
-    return response.data;
+const getEpisodeInfo = async (url: string) => {
+
+    return await await axios.get(url)
+    .then(response => {
+        return response.data;
+    })
+    .catch(error => {
+        console.log(error);
+        return error;
+    });
 };
 
 

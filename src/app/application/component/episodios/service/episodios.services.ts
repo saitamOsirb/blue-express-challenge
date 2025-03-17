@@ -3,13 +3,25 @@ import axios from "axios";
 
 const getEpisodios = async () => {
     const url: string = EndPointEpisodios;
-    const response = await axios.get(url);
-    return response.data;
+    return await axios.get(url)
+    .then(response => {
+        return response.data;
+    })
+    .catch(error => {
+        console.log(error);
+        return error;
+    });
 };
 
 const getCharacterByUrl = async (url: string) => {
-    const response = await axios.get(url);
-    return response.data;
+    return await axios.get(url)
+    .then(response => {
+        return response.data;
+    })
+    .catch(error => {
+        console.log(error);
+        return error;
+    });
 };
 
 

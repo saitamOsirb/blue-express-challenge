@@ -3,13 +3,23 @@ import axios from "axios";
 
 const getUbicaciones = async () => {
     const url: string = EndPointUbicaciones;
-    const response = await axios.get(url);
-    return response.data;
+    return await axios.get(url).then(response => {
+        return response.data;
+    })
+        .catch(error => {
+            console.log(error);
+            return error;
+        });
 };
 
 const getResident = async (url: string) => {
-    const response = await axios.get(url);
-    return response.data;
+    return await axios.get(url).then(response => {
+        return response.data;
+    })
+        .catch(error => {
+            console.log(error);
+            return error;
+        });
 };
 
 

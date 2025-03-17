@@ -23,6 +23,7 @@ export function PersonajesState({ children }) {
 
     const setPersonajeState = async (page: number, name: string, status: string) => {
         const response = await getPersonajes(page, name || "", status || "");
+        console.log(response);
         const listPersonaje: any = arrayChunk(response.results, 5);
         setPersonajes(listPersonaje);
         setPage(page);
