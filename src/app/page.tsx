@@ -5,8 +5,8 @@ import { Footer } from "./shared/footer/component/Footer";
 import { NavBar } from "./shared/navbar/component/NavBar";
 
 
-
 export default function Home() {
+  
   return (
     <main>
       <NavBar></NavBar>
