@@ -2,11 +2,10 @@
 
 import { useContext, useEffect } from "react"
 import { ubicacionContext } from "../context/ubicacion.context"
-import { getResident } from "../service/ubicaciones.services";
 import { ModalUbicaciones } from "./modal/component/Modal-Ubicaciones";
 export function Ubicaciones() {
 
-    const { ubicaciones, setUbicacioneState, setResidentes } = useContext(ubicacionContext)
+    const { ubicaciones, setUbicacioneState, sendDataToModal } = useContext(ubicacionContext)
     useEffect(() => {
         setUbicacioneState();
     }, []);
@@ -31,14 +30,7 @@ export function Ubicaciones() {
                         <th>{
                             <button className="btn btn-active btn-primary"
                                 onClick={async () => {
-                                    const modal = document.getElementById('modalResidentes');
-                                    (modal as any).showModal();
-                                    let residentes = [];
-                                    for (let z = 0; z < ubicaciones[i].residents.length; z++) {
-                                        let residente = await getResident(ubicaciones[i].residents[z]);
-                                        residentes.push(residente);
-                                    }
-                                    setResidentes(residentes);
+                                    await sendDataToModal(row);
                                 }}
                             >ver</button>
                         }</th>
