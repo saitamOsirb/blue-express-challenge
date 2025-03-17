@@ -5,21 +5,19 @@ const getUbicaciones = async () => {
     const url: string = EndPointUbicaciones;
     return await axios.get(url).then(response => {
         return response.data;
-    })
-        .catch(error => {
-            console.log(error);
-            return error;
-        });
+    }).catch(error => {
+
+        return error;
+    });
 };
 
 const getResident = async (url: string) => {
     return await axios.get(url).then(response => {
         return response.data;
-    })
-        .catch(error => {
-            console.log(error);
-            return error;
-        });
+    }).catch(error => {
+
+        return error;
+    });
 };
 
 

@@ -9,7 +9,7 @@ const getPersonajes = async (page: number, name: string, status: string) => {
             return response.data;
         })
         .catch(error => {
-            console.log(error);
+
             return error;
         });
 };
@@ -17,13 +17,12 @@ const getPersonajes = async (page: number, name: string, status: string) => {
 const getEpisodeInfo = async (url: string) => {
 
     return await await axios.get(url)
-    .then(response => {
-        return response.data;
-    })
-    .catch(error => {
-        console.log(error);
-        return error;
-    });
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            return error;
+        });
 };
 
 
