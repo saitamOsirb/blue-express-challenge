@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { personajesContext } from "./personajesContext";
-import { getPersonajes } from "../service/Personaje.services";
+import { getEpisodeInfo, getPersonajes } from "../service/Personaje.services";
 import { arrayChunk } from "../../shared/tools/generic";
 
 export default function PersonajesState({ children }) {
@@ -13,14 +13,9 @@ export default function PersonajesState({ children }) {
     const [selectInput, setSelectInput] = useState("");
     const [page, setPage] = useState(0);
     const [total, setTotal] = useState(0);
-    const [width, setWidth] = useState(0);
+
     const [personaje, setPersonaje] = useState({});
     const [episodios, setEpisodios] = useState([]);
-
-
-    const updateDimensions = () => {
-        setWidth(window.innerWidth);
-    }
 
     const setPersonajeState = async (page: number, name: string, status: string) => {
         if (status == "All") { status = ""; }
@@ -30,10 +25,20 @@ export default function PersonajesState({ children }) {
         setPage(page);
         setTotal(response.info.pages);
     };
+
+    const senDataToModal = async (row) => {
+        const modal = document.getElementById('my_modal_1');
+                                        (modal as any).showModal();
+                                        setPersonaje(row);
+                                        let episodes = [];
+                                        for (let z = 0; z < row.episode.length; z++) {
+                                            let episode = await getEpisodeInfo(row.episode[z]);
+                                            episodes.push(episode);
+                                        }
+                                        setEpisodios(episodes);
+    }
     useEffect(() => {
         setPersonajeState(1, inputName, selectInput);
-        window.addEventListener("resize", updateDimensions);
-        return () => window.removeEventListener("resize", updateDimensions);
     }, []);
 
     return <personajesContext.Provider
@@ -41,7 +46,6 @@ export default function PersonajesState({ children }) {
             personajes,
             page,
             total,
-            width,
             setPersonajes,
             setPage,
             setTotal,
@@ -57,7 +61,8 @@ export default function PersonajesState({ children }) {
             setPersonaje,
             episodios,
             setEpisodios,
-            setPersonajeState
+            setPersonajeState,
+            senDataToModal
         }}
     >
         {children}

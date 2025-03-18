@@ -23,12 +23,12 @@ export function Filter(this: any) {
 
     const handleChange = (event: any) => {
         setSelectInput(event.target.value);
-        setPersonajeState(1, inputName, selectInput);
+        setPersonajeState(1, inputName, event.target.value);
     };
 
     const handleInputChange = (event: any) => {
         setInputName(event.target.value)
-        setPersonajeState(1, inputName, selectInput);
+        setPersonajeState(1, event.target.value, selectInput);
     };
     return <div className="join">
         <div>
