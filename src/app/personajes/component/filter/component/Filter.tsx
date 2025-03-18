@@ -23,7 +23,6 @@ export function Filter(this: any) {
 
     const handleChange = (event: any) => {
         setSelectInput(event.target.value);
-        setPersonajeState(page, inputName, event.target.value);
         setPersonajeState(1, inputName, selectInput);
     };
 
