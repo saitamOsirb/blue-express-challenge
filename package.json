@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/env": "^15.2.2",
+    "@rooks/use-window-size": "^4.11.2",
     "axios": "^1.8.3",
     "next": "15.2.2",
     "react": "^19.0.0",
