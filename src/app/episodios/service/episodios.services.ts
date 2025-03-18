@@ -1,9 +1,9 @@
 import { EndPointEpisodios } from "../../shared/tools/endPoint";
 import axios from "axios";
 
-const getEpisodios = async () => {
+const getEpisodios = async (page: number) => {
     const url: string = EndPointEpisodios;
-    return await axios.get(url)
+    return await axios.get(`${url}?page=${page}`)
         .then(response => {
             return response.data;
         })

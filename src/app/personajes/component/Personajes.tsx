@@ -20,7 +20,7 @@ export function Personajes() {
                         personaje.map((row: any, f: number) => (
                             <div key={f}>
                                 <div >
-                                    <img className="size-48 shadow-xl rounded-md" alt="" src={row.image} />
+                                    <img className="size-48 shadow-xl rounded-md" alt="" src={row.image} height={120} width={120} />
                                     <p><b>Nombre:</b> <br />{row.name}</p>
                                     <p><b>Tipo:</b> <br />{row.type == "" ? 'unknown' : row.type}</p>
                                     <p><b>Especie:</b> <br />{row.species}</p>

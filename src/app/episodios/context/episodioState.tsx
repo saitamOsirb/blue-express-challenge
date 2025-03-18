@@ -10,10 +10,15 @@ export function EpisodioState({ children }) {
     const [episodios, setEpisodios] = useState([]);
     const [episodio, setEpisodio] = useState([]);
     const [characters, setCharacters] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(1);
 
-    const setEpisodioState = async () => {
-        const response = await getEpisodios();
+    const setEpisodioState = async (page: number) => {
+        if (page == null || page == undefined) { page = 1; }
+        const response = await getEpisodios(page);
         setEpisodios(response.results);
+        setTotalPage(response.info.pages);
+        setPage(page);
     };
 
     const sendDataToModal = async (row: any) => {
@@ -31,8 +36,9 @@ export function EpisodioState({ children }) {
         setEpisodio(row);
         setCharacters(character)
     }
+
     useEffect(() => {
-        setEpisodioState();
+        setEpisodioState(page);
     }, []);
 
     return <EpisodioContext.Provider
@@ -40,7 +46,9 @@ export function EpisodioState({ children }) {
             episodios, setEpisodios, setEpisodioState,
             episodio, setEpisodio,
             sendDataToModal,
-            characters, setCharacters
+            characters, setCharacters,
+            page, setPage,
+            totalPage, setTotalPage
         }}
     >
         {children}

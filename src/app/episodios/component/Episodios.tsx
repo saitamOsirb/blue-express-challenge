@@ -3,6 +3,7 @@
 import { useContext } from "react"
 import { ModalPersonajesEpisodios } from "./modal/Modal-Personajes-Episodios";
 import { EpisodioContext } from "../context/episodioContext";
+import { Paginador } from "./paginador/component/Paginador";
 
 export function Episodios() {
 
@@ -10,40 +11,44 @@ export function Episodios() {
     if (!context) { return null; }
     const { episodios, sendDataToModal } = context;
 
-    return <div className="overflow-x-auto">
-        <table className="table">
-            <thead>
-                <tr>
-                    <th>N°</th>
-                    <th>Nombre</th>
-                    <th>Episodio</th>
-                    <th>Fecha</th>
-                    <th>Participantes</th>
-                </tr>
-            </thead>
-            <tbody>
-                {episodios.map((row: any, i: number) => (
-                    <tr key={i}>
-                        <th>{row.id}</th>
-                        <th>{row.name}</th>
-                        <th>{row.episode}</th>
-                        <th>{row.air_date}</th>
-                        <th>
-                            <button className="btn btn-active btn-primary"
-                                onClick={async () => {
-                                    sendDataToModal(row)
-                                }}
-
-                            >ver</button>
-                        </th>
+    return <main>
+        <Paginador></Paginador>
+        <div className="overflow-x-auto">
+            
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Nombre</th>
+                        <th>Episodio</th>
+                        <th>Fecha</th>
+                        <th>Participantes</th>
                     </tr>
-                ))
-                }
-            </tbody>
-        </table>
-        <br />
+                </thead>
+                <tbody>
+                    {episodios.map((row: any, i: number) => (
+                        <tr key={i}>
+                            <th>{row.id}</th>
+                            <th>{row.name}</th>
+                            <th>{row.episode}</th>
+                            <th>{row.air_date}</th>
+                            <th>
+                                <button className="btn btn-active btn-primary"
+                                    onClick={async () => {
+                                        sendDataToModal(row)
+                                    }}
 
-        <ModalPersonajesEpisodios></ModalPersonajesEpisodios>
-    </div>
+                                >ver</button>
+                            </th>
+                        </tr>
+                    ))
+                    }
+                </tbody>
+            </table>
+            <br />
+
+            <ModalPersonajesEpisodios></ModalPersonajesEpisodios>
+        </div>
+    </main>
 
 }

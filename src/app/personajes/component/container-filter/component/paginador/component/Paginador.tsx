@@ -13,16 +13,18 @@ export function Paginador() {
     const handleBackClick = (page: number) => {
         return (event: React.MouseEvent) => {
             if (page != 1) {
-                setPersonajeState((page - 1), inputName,selectInput );
+                setPersonajeState((page - 1), inputName, selectInput);
             }
         }
     }
     const handleNextClick = (page: number, maxPage: number) => {
         return (event: React.MouseEvent) => {
-            setPersonajeState((page + 1),  inputName,selectInput);
+            if (page < maxPage) {
+                setPersonajeState((page + 1), inputName, selectInput);
+            }
         }
     }
-
+    
     return <div>
         <button className="btn btn-xs" onClick={handleBackClick(page)}>{"<"}</button>
         <button className="btn btn-xs" disabled>{page}</button>
