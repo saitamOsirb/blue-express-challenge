@@ -7,10 +7,14 @@ export function UbicacionState({ children }) {
     const [ubicaciones, setUbicaciones] = useState([]);
     const [ubicacion, setUbicacion] = useState({});
     const [residentes, setResidentes] = useState([]);
+    const [page, setPage] = useState(1);
+    const [total, setTotal] = useState(1);
 
-    const setUbicacioneState = async (page: number, name: string, status: string) => {
-        const response = await getUbicaciones();
+    const setUbicacioneState = async (page: number) => {
+        const response = await getUbicaciones(page);
         setUbicaciones(response.results);
+        setTotal(response.info.pages);
+        setPage(page)
     };
 
     const sendDataToModal = async (row: any) => {
@@ -28,7 +32,9 @@ export function UbicacionState({ children }) {
         value={{
             ubicaciones, setUbicaciones, setUbicacioneState,
             ubicacion, setUbicacion,
-            residentes, setResidentes, sendDataToModal
+            residentes, setResidentes, sendDataToModal,
+            page, setPage,
+            total, setTotal
         }}
     >
         {children}

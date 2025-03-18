@@ -35,7 +35,7 @@ export function Episodios() {
                             <th>
                                 <button className="btn btn-active btn-primary"
                                     onClick={async () => {
-                                        sendDataToModal(row)
+                                        await sendDataToModal(row)
                                     }}
 
                                 >ver</button>
