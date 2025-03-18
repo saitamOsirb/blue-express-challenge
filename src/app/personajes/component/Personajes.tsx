@@ -1,39 +1,17 @@
 "use client";
 import { useContext } from "react"
 import { personajesContext } from "../context/personajesContext";
-import { Filter } from "./filter/component/Filter";
-import { Paginador } from "./paginador/component/Paginador";
 import { StatusDeath } from "./status/component/StatusDeath";
 import { StatusAlive } from "./status/component/StatusAlive";
 import { StatusUnknown } from "./status/component/StatusUnknown";
 import { ModalPersonajes } from "./modal/ModalPersonajes";
-import useWindowSize from "@rooks/use-window-size";
+import { ContainerFilter } from "./container-filter/component/ContainerFilter";
 
 export function Personajes() {
-    const { innerWidth } = useWindowSize();
     const { personajes, senDataToModal } = useContext(personajesContext)
     return <main>
         <br />
-        <section>
-            {
-                innerWidth < 450 ? <><div className="flex w-full">
-                    <div className="card bg-base-300 rounded-box grid h-20 grow place-items-center">
-                        <Filter></Filter>
-                    </div>
-                </div><br /><div className="flex w-full">
-                        <div className="card bg-base-300 rounded-box grid h-20 grow place-items-center">
-                            <Paginador></Paginador>
-                        </div>
-                    </div></>
-                    : <div>
-                        <div className="flex w-full">
-                            <div className="card bg-base-300 rounded-box grid h-20 grow place-items-center"> <Filter></Filter></div>
-                            <div className="divider divider-horizontal"></div>
-                            <div className="card bg-base-300 rounded-box grid h-20 grow place-items-center"><Paginador></Paginador></div>
-                        </div>
-                    </div>
-            }
-        </section>
+        <ContainerFilter></ContainerFilter>
         <br />
         {
             personajes.map((personaje: any, i: any) => (

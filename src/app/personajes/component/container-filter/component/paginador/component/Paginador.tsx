@@ -1,6 +1,6 @@
 'use client'
 
-import { personajesContext } from "../../../context/personajesContext"
+import { personajesContext } from "@/app/personajes/context/personajesContext";
 import React from "react";
 import { useContext } from "react"
 
